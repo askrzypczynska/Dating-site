@@ -1,0 +1,12 @@
+Colors:
+
+Background
+-e04684 Fiolet
+-fc5069 Pink
+-ff8345 Orange
+
+Font
+-424242
+
+Buttons
+-e94057
