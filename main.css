@@ -63,7 +63,7 @@ body{
     grid-template-columns: repeat(2, 130px);
 }
 
-.popupButtonsInterest button{
+.popupButton{
     text-align: left;
     font-size: 15px;
     border: solid 1px #E8E6EA;
@@ -75,17 +75,23 @@ body{
     cursor: pointer;
 }
 
-.popupButtonsInterest i{
+.popupButtonsClicked{
+    border: solid 1px #e94057;
+    background-color: #e94057;
+    color: white;
+}
+
+.colorPink{
     color: #e94057;
 }
 
-.popupButtonsInterest button:hover{
-    background-color: #e94057;
-    color: white;
-    border: solid 1px #e94057;
+.popupIconWhite{
+    color:white;
 }
-.popupButtonsInterest button:hover i{
-    color: white;
+
+.popupButtonsInterest button:hover{
+
+    box-shadow: 0px 0px 10px #e94057;
 }
 
 .popupError{
