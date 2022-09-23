@@ -13,8 +13,8 @@ const candidatePhoto = document.querySelector("#candidatePhoto")
 
 const letters = /[a-zA-Z]/g;
 
+let userNameLocal;
 let userInterest = [];
-let userName;
 
 let candidateIndex = 0;
 
@@ -30,7 +30,26 @@ class Candidate{
 
 }
 
+const openSite = () => {
+    popupInput.value = localStorage.getItem("userNameLocal")
+    userInterest = localStorage.getItem("userInterest").split(",")
+
+    localStorage.getItem("userInterest")
+    for(let i=0; i<popupButton.length; i++){
+        for(let j=0; j<userInterest.length; j++){
+            if(popupButton[i].textContent.includes(userInterest[j])){
+                popupButton[i].classList.toggle("popupButtonsClicked")
+                popupButton[i].children[0].classList.toggle("popupIconWhite")
+            }
+        }
+    }
+
+}
+
+openSite();
+
 const checkForm = () => {
+    userInterest = [];
     checkSelectedInsterest();
 
     if(popupInput.value == ""){
@@ -47,7 +66,10 @@ const checkForm = () => {
         userName = popupInput.value
         //save userName and userInterest to local storage
         openClosePopup()
-        userInterest = [];
+        changeProfilBtn.innerHTML = popupInput.value + ` <i class="fa-solid fa-circle-user"></i>`;
+        localStorage.setItem('userNameLocal', popupInput.value);
+        localStorage.setItem('userInterest', userInterest);
+
     }
 }
 
@@ -109,3 +131,11 @@ SaveBtn.addEventListener('click', checkForm);
 changeProfilBtn.addEventListener('click', openClosePopup);
 LikeBtn.addEventListener('click', nextCandidate)
 RejectedBtn.addEventListener('click', nextCandidate)
+
+// localStorage.setItem('counterBtn', counterBtn);
+// localStorage.clear();
+
+// counterBtn = localStorage.getItem("counterBtn");
+// if(counterBtn == NaN){
+//     counterBtn = 0;
+// }
