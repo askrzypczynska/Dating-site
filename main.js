@@ -8,6 +8,7 @@ const changeProfilBtn = document.querySelector(".changeProfil")
 
 const LikeBtn = document.querySelector(".mainCandidateLike")
 const RejectedBtn = document.querySelector(".mainCandidateRejected")
+const resetSiteBtn = document.querySelector(".resetSite")
 
 const candidatePhoto = document.querySelector("#candidatePhoto")
 
@@ -31,17 +32,19 @@ class Candidate{
 }
 
 const openSite = () => {
-    popupInput.value = localStorage.getItem("userNameLocal")
-    userInterest = localStorage.getItem("userInterest").split(",")
-
-    localStorage.getItem("userInterest")
-    for(let i=0; i<popupButton.length; i++){
-        for(let j=0; j<userInterest.length; j++){
-            if(popupButton[i].textContent.includes(userInterest[j])){
-                popupButton[i].classList.toggle("popupButtonsClicked")
-                popupButton[i].children[0].classList.toggle("popupIconWhite")
+    if(localStorage.getItem("userNameLocal") !== null){
+        popupInput.value = localStorage.getItem("userNameLocal")
+        userInterest = localStorage.getItem("userInterest").split(",")
+    
+        localStorage.getItem("userInterest")
+        for(let i=0; i<popupButton.length; i++){
+            for(let j=0; j<userInterest.length; j++){
+                if(popupButton[i].textContent.includes(userInterest[j])){
+                    popupButton[i].classList.toggle("popupButtonsClicked")
+                    popupButton[i].children[0].classList.toggle("popupIconWhite")
+                }
             }
-        }
+        }   
     }
 
 }
@@ -125,17 +128,22 @@ candidateDraw();
 
 const nextCandidate = () =>{
     candidateIndex++;
-    candidateDraw();
+    if(candidateIndex == candidates.length){
+        document.querySelector(".mainCandidate").classList.toggle("hiddenClass")
+        document.querySelector(".noCandidates").classList.toggle("hiddenClass")
+    }else{
+        candidateDraw();
+    }
 }
+
+const resetSite = () => {
+    localStorage.clear()
+    window.location.reload()
+}
+
+
 SaveBtn.addEventListener('click', checkForm);
 changeProfilBtn.addEventListener('click', openClosePopup);
-LikeBtn.addEventListener('click', nextCandidate)
-RejectedBtn.addEventListener('click', nextCandidate)
-
-// localStorage.setItem('counterBtn', counterBtn);
-// localStorage.clear();
-
-// counterBtn = localStorage.getItem("counterBtn");
-// if(counterBtn == NaN){
-//     counterBtn = 0;
-// }
+LikeBtn.addEventListener('click', nextCandidate);
+RejectedBtn.addEventListener('click', nextCandidate);
+resetSiteBtn.addEventListener('click', resetSite);
