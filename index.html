@@ -16,7 +16,7 @@
 
 <body>
 
-    <div class="popupLogin">
+    <div class="popupLogin hiddenClass">    <!-- hiddenClass usunac -->
         <img src="Concept/timber-logo.png" alt="Timber logo" id="popupLogo">
         <fieldset>
             <legend>Name</legend>
@@ -42,8 +42,7 @@
         <button id="popupSave">Save</button>
     </div>
 
-    <div class="mainSite hiddenClass">
-        <div class="mainSite">
+    <div class="mainSite "> <!-- hiddenClass dodac -->
         <img src="Concept/timber-white-logo.png" alt="White Timber logo" class="mainLogo">
         <div class="mainCandidate ">
             <img src="" alt="Foto of candidate" id="candidatePhoto">
@@ -80,8 +79,21 @@
             </div>
 
         </div>
+
         <button class="changeProfil">You <i class="fa-solid fa-circle-user"></i></button>
     </div>
+
+    <div class="messagePoppupList">
+
+        <template class="messagePoppupTemp">
+            <div class="messagePoppup">
+                <img src="" alt="Candidate icons" class="messageIcon">
+                <span id="messageName">dsafd</span>
+            </div>
+        </template>
+
+    </div>
+
     
     <script src="main.js"></script> 
 </body>
