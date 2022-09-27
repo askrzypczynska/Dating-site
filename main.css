@@ -6,6 +6,7 @@ body{
 
     font-family: 'Zen Maru Gothic', sans-serif;
     color: #424242;
+    
 }
 
 .popupLogin{
@@ -361,4 +362,111 @@ body{
 
 .messagePoppup span{
     font-weight: bold;
+}
+
+.messageBox{
+
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 20px;
+    
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    width: 500px;
+    box-shadow: 0px 0px 15px #e94057;
+
+
+}
+
+.candidateMessageBox{
+    border: 0px solid #eb4d63;
+    background-color: #fff0f0;
+    border-radius: 5px;
+    padding: 10px;
+    padding-bottom: 25px;
+    margin: 10px;
+
+}
+
+.candidateMessageBox:first-of-type{
+    margin-top: 25px;
+}
+
+.candidateMessageBox img{
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+.timeCandidateMessage1, .timeCandidateMessage2{
+    font-size: 15px;
+    float: right;
+    color: #eb4d63;
+}
+
+.userAnswersChoice{
+    float: right;
+}
+
+.userAnswer{
+    display: list-item;
+    margin: 10px;
+
+    border: 2px solid #eb4d63;
+    background-color: #eb4d63;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 100px;
+    color: white;
+    cursor: pointer;
+}
+
+.userAnswer:hover{
+    border: 2px solid #d44558;
+    background-color: #d44558;
+    
+    box-shadow: 0px 0px 10px #e94057;
+
+}
+
+.userMessageBox{
+    border: 0px solid #eb4d63;
+    background-color: #fff0f0;
+    border-radius: 5px;
+    padding: 10px;
+    padding-bottom: 25px;
+    margin: 10px;
+    text-align: right;
+}
+
+.userMessageBox i{
+    font-size: 60px;
+    color: #eb4d63;
+    float: right;
+
+    margin-left: 20px;
+    border-radius: 50%;
+}
+
+.timeUsereMessage{
+    font-size: 15px;
+    float: left;
+    color: #eb4d63;
+}
+
+#closeMessageBox{
+    border: none;
+    background-color: transparent;
+    float: right;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
 }

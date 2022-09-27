@@ -67,7 +67,7 @@
 
             </div>
         </div>
-        <div class="noCandidates hiddenClass">
+        <div class="noCandidates hiddenClass"> 
             <div id="noCandidatesInfo">
                 There are no more </br> candidates for today.</br> 
                 <p>Try it tomorrow!</p>
@@ -83,14 +83,43 @@
         <button class="changeProfil">You <i class="fa-solid fa-circle-user"></i></button>
     </div>
 
-    <div class="messagePoppupList">
+    <div class="messagePoppupList"> 
 
         <template class="messagePoppupTemp">
             <div class="messagePoppup">
                 <img src="" alt="Candidate icons" class="messageIcon">
-                <span id="messageName">dsafd</span>
+                <span class="messageName">dsafd</span>
             </div>
         </template>
+
+    </div>
+
+    <div class="messageBox hiddenClass"> <!-- hiddenClass usunac -->
+
+        <button id="closeMessageBox"><i class="fa-solid fa-xmark closeMessage"></i></button>
+
+        <div class="candidateMessageBox"> 
+            <img src="Concept/birdIcon.png" alt="Avatar" class="messageIcon">
+            <p id="candidateMessage1">W następnym tygodniu planuje napad na bank centralny. Chcesz iść ze mną?</p>
+            <span class="timeCandidateMessage1">11:00</span>
+        </div>
+
+        <div class="userAnswersChoice">
+            <button class="userAnswer">Yes, sure!</button>
+            <button class="userAnswer">No, thx.</button>
+        </div>
+
+        <div class="userMessageBox hiddenClass"> <!-- hiddenClass usunac -->
+            <i class="fa-solid fa-circle-user"></i>
+            <p id="candidateMessage1">Yes, sure!</p>
+            <span class="timeUsereMessage">11:00</span>
+        </div>
+
+        <div class="candidateMessageBox hiddenClass"> <!-- hiddenClass usunac -->
+            <img src="Concept/birdIcon.png" alt="Avatar" class="messageIcon">
+            <p id="candidateMessage2">Super, spotkajmy się w sobotę pod bankiem.</p>
+            <span class="timeCandidateMessage2">11:00</span>
+        </div>
 
     </div>
 

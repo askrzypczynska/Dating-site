@@ -10,8 +10,11 @@ const LikeBtn = document.querySelector(".mainCandidateLike")
 const RejectedBtn = document.querySelector(".mainCandidateRejected")
 const resetSiteBtn = document.querySelector(".resetSite")
 
+const closeMessageBtn = document.querySelector(".closeMessage")
+
 const candidatePhoto = document.querySelector("#candidatePhoto")
 const messagePoppupTemp = document.querySelector(".messagePoppupTemp")
+const messagePoppupList = document.querySelector(".messagePoppupList")
 
 const messageAudio = new Audio('Concept/message.mp3');
 
@@ -143,10 +146,11 @@ const showMessagePoppup = () => {
     const messagePoppup = messagePoppupTemp.content.cloneNode(true);
     
     messagePoppup.querySelector(".messageIcon").src = candidates[candidateStack[0]].icon;
-    messagePoppup.querySelector("#messageName").textContent = candidates[candidateStack[0]].name + " wrote to you!";
+    messagePoppup.querySelector(".messageName").textContent = candidates[candidateStack[0]].name + " wrote to you!";
     document.querySelector(".messagePoppupList").appendChild(messagePoppup)
     candidateStack.shift()
 
+    messagePoppupList.addEventListener("click", openChat)
 }
 
 const nextCandidate = () =>{
@@ -157,6 +161,25 @@ const nextCandidate = () =>{
     }else{
         candidateDraw();
     }
+}
+
+const openChat = (e) => {
+    if(e.target.classList[0] !== "messagePoppupList"){
+        if(e.target.classList[0] === "messageIcon" || e.target.classList[0] === "messageName"){
+            document.querySelector(".messagePoppupList").removeChild(e.target.parentElement)
+            document.querySelector(".messageBox").classList.remove("hiddenClass")
+        }
+        else{
+            document.querySelector(".messagePoppupList").removeChild(e.target)
+            document.querySelector(".messageBox").classList.remove("hiddenClass")
+            console.log("2");
+        }
+    }
+
+}
+
+const closeChat = () =>{
+    document.querySelector(".messageBox").classList.add("hiddenClass")
 }
 
 const resetSite = () => {
@@ -170,3 +193,4 @@ changeProfilBtn.addEventListener('click', openClosePopup);
 LikeBtn.addEventListener('click', likeCandidate);
 RejectedBtn.addEventListener('click', nextCandidate);
 resetSiteBtn.addEventListener('click', resetSite);
+closeMessageBtn.addEventListener('click', closeChat);
