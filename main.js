@@ -9,11 +9,15 @@ const changeProfilBtn = document.querySelector(".changeProfil")
 const LikeBtn = document.querySelector(".mainCandidateLike")
 const RejectedBtn = document.querySelector(".mainCandidateRejected")
 const resetSiteBtn = document.querySelector(".resetSite")
+const userAnswerYesBtn = document.querySelector(".userAnswerYes")
+const userAnswerNoBtn = document.querySelector(".userAnswerNo")
 
 const closeMessageBtn = document.querySelector(".closeMessage")
 
 const candidatePhoto = document.querySelector("#candidatePhoto")
 const messagePoppupTemp = document.querySelector(".messagePoppupTemp")
+const userAnswersChoiceButtonsTemp = document.querySelector(".userAnswersChoiceButtonsTemp")
+const userAnswersChoice = document.querySelector(".userAnswersChoice")
 const messagePoppupList = document.querySelector(".messagePoppupList")
 
 const messageAudio = new Audio('Concept/message.mp3');
@@ -26,6 +30,10 @@ let userInterest = [];
 let candidateIndex = 0;
 let activeMessageIndex = 0;
 let candidateStack = [];
+let userAnswerIsVisivle = true;
+
+let currentdate = new Date()
+let time = currentdate.getHours() + ":" + currentdate.getMinutes() 
 
 class Candidate{
 
@@ -185,58 +193,89 @@ const openChat = (e) => {
             setChat(parseInt(e.target.closest(".messagePoppup").id))
         }
         activeMessageIndex--
+
     }
 }
 
 const setChat = (x) =>{
-    let currentdate = new Date()
-    let time = currentdate.getHours() + ":" + currentdate.getMinutes() 
 
-    console.log(x);
     switch(x){
         case 1:
-            document.querySelector(".messageIcon").src = candidates[x-1].icon;
+            document.querySelector(".messageBoxIcon").src = candidates[x-1].icon;
             document.getElementById("candidateMessage1").innerHTML = "I'm organizing a bank robbery this Friday. Do you want to come with me?"
             document.querySelector(".timeCandidateMessage1").innerHTML = time
             break;
 
         case 2:
-            document.querySelector(".messageIcon").src = candidates[x-1].icon;
+            document.querySelector(".messageBoxIcon").src = candidates[x-1].icon;
             document.getElementById("candidateMessage1").innerHTML = "I can see that you liked me. Can I move in tomorrow?"
             document.querySelector(".timeCandidateMessage1").innerHTML = time
             break;
 
         case 3:
-            document.querySelector(".messageIcon").src = candidates[x-1].icon;
+            document.querySelector(".messageBoxIcon").src = candidates[x-1].icon;
             document.getElementById("candidateMessage1").innerHTML = "This month I was only gonna sleep and eat, but I can make an exception. Wanna go outside?"
             document.querySelector(".timeCandidateMessage1").innerHTML = time
             break;
 
         case 4:
-            document.querySelector(".messageIcon").src = candidates[x-1].icon;
+            document.querySelector(".messageBoxIcon").src = candidates[x-1].icon;
             document.getElementById("candidateMessage1").innerHTML = "Do you want to come with me to my exhibition? Tickets are only 230$ apiece."
             document.querySelector(".timeCandidateMessage1").innerHTML = time
             break;
         
         case 5:
-            document.querySelector(".messageIcon").src = candidates[x-1].icon;
+            document.querySelector(".messageBoxIcon").src = candidates[x-1].icon;
             document.getElementById("candidateMessage1").innerHTML = "Will you explain to me at dinner, how much of a threat is a water gun?"
             document.querySelector(".timeCandidateMessage1").innerHTML = time
             break;
 
         case 6:
-            document.querySelector(".messageIcon").src = candidates[x-1].icon;
+            document.querySelector(".messageBoxIcon").src = candidates[x-1].icon;
             document.getElementById("candidateMessage1").innerHTML = "I'm in your town on Sunday. Maybe I'll fly by You?"
             document.querySelector(".timeCandidateMessage1").innerHTML = time
             break;
         
-        case 6:
-            document.querySelector(".messageIcon").src = candidates[x-1].icon;
+        case 7:
+            document.querySelector(".messageBoxIcon").src = candidates[x-1].icon;
             document.getElementById("candidateMessage1").innerHTML = "Will you come with me to a local Mirror Maze, so you can gaze at me from all sides."
             document.querySelector(".timeCandidateMessage1").innerHTML = time
             break;
-
     }
+
+    //Wykonuje się po pierwszej rozmowie, gdy Przyciski są usuniętę --- dodać addevent
+    if(userAnswerIsVisivle === false){
+        const userAnswers = userAnswersChoiceButtonsTemp.content.cloneNode(true);
+        document.querySelector(".userAnswersChoice").appendChild(userAnswers)
+        document.querySelector(".userMessageBox").classList.toggle("hiddenClass")
+    
+    }
+
+    userAnswerYesBtn.addEventListener('click', continueChatOnYes);
+    userAnswerNoBtn.addEventListener('click', continueChatOnNo);
+
+}
+
+const continueChatOnYes = () =>{
+
+    console.log("Tak");
+    userAnswersChoice.removeChild(userAnswerYesBtn)
+    userAnswersChoice.removeChild(userAnswerNoBtn)
+    userAnswerIsVisivle = false;
+    document.querySelector(".userMessageBox").classList.toggle("hiddenClass")
+    document.querySelector(".timeUsereMessage").innerHTML = time;
+
+}
+
+const continueChatOnNo = () =>{
+
+    console.log("Nie");
+    userAnswersChoice.removeChild(userAnswerYesBtn)
+    userAnswersChoice.removeChild(userAnswerNoBtn)
+    userAnswerIsVisivle = false;
+    document.querySelector(".userMessageBox").classList.toggle("hiddenClass")
+    document.querySelector(".timeUsereMessage").innerHTML = time;
+    document.getElementById("userMessage1").innerHTML = "No, thx.";
 }
 
 const closeChat = () =>{

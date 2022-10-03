@@ -99,19 +99,24 @@
         <button id="closeMessageBox"><i class="fa-solid fa-xmark closeMessage"></i></button>
 
         <div class="candidateMessageBox"> 
-            <img src="" alt="Avatar" class="messageIcon">
+            <img src="" alt="Avatar" class="messageBoxIcon">
             <p id="candidateMessage1">W następnym tygodniu planuje napad na bank centralny. Chcesz iść ze mną?</p>
             <span class="timeCandidateMessage1">11:00</span>
         </div>
 
         <div class="userAnswersChoice">
-            <button class="userAnswer">Yes, sure!</button>
-            <button class="userAnswer">No, thx.</button>
+            <template class="userAnswersChoiceButtonsTemp">
+                <button class="userAnswerYes">Yes, sure!</button>
+                <button class="userAnswerNo">No, thx.</button>
+            </template>
+
+            <button class="userAnswerYes">Yes, sure!</button>
+            <button class="userAnswerNo">No, thx.</button>
         </div>
 
         <div class="userMessageBox hiddenClass"> <!-- hiddenClass usunac -->
             <i class="fa-solid fa-circle-user"></i>
-            <p id="candidateMessage1">Yes, sure!</p>
+            <p id="userMessage1">Yes, sure!</p>
             <span class="timeUsereMessage">11:00</span>
         </div>
 
