@@ -24,17 +24,20 @@ let userNameLocal;
 let userInterest = [];
 
 let candidateIndex = 0;
+let activeMessageIndex = 0;
 let candidateStack = [];
 
 class Candidate{
 
-	constructor(name, job, about, interested, img, icon){
+	constructor(name, job, about, interested, img, icon, candidateId){
 		this.name = name;
 		this.job = job;
 		this.about = about;
 		this.interested = interested;
 		this.img = img;
         this.icon = icon;
+        this.candidateId = candidateId;
+
 	}
 
 }
@@ -124,13 +127,13 @@ for(let i = 0; i<popupButton.length ; i++){
 let candidates = [];
 
 
-candidates.push(new Candidate("Rosso the Lobster", " Underwater mafia leader", "I'm just escaped from an underwater Italian prison. I'm trying to be more polite. I'm looking for an accomplice for a crime.", [`<i class="fa-solid fa-volleyball"></i> Sport`, `<i class="fa-solid fa-pizza-slice"></i> Cooking`, `<i class="fa-solid fa-earth-americas"></i> Travel`], "Concept/lobster.png", "Concept/lobsterIcon.png"))
-candidates.push(new Candidate("Alveolar the Parasite", " CEO of DirtyWater Company", "I'm looking for a new host. I promise to clean up and water the flowers.", [`<i class="fa-solid fa-camera"></i> Photo`, `<i class="fa-solid fa-pizza-slice"></i> Cooking`, `<i class="fa-solid fa-book"></i> Book`], "Concept/parasite.png", "Concept/parasiteIcon.png"))
-candidates.push(new Candidate("Sophie the Cat", " Librarian", "I am looking for a calm partner with comfortable knees.", [`<i class="fa-solid fa-bag-shopping"></i> Shopping`, `<i class="fa-solid fa-otter"></i> Animals`, `<i class="fa-solid fa-book"></i> Book`], "Concept/cat.png", "Concept/catIcon.png"))
-candidates.push(new Candidate("Leonardo the Lizard", " Freelancer Artist", "I span all my free time on artistic self-development, so I'm looking for a rich partner.", [`<i class="fa-solid fa-palette"></i> Art`, `<i class="fa-solid fa-gamepad"></i> Games`, `<i class="fa-solid fa-video"></i> Movie`], "Concept/lizard.png", "Concept/lizardIcon.png"))
-candidates.push(new Candidate("Centaurid the Galactic Wolf", " Army leader of Arp 332 Galaxy Chain", "I am looking for someone to help me understand this planet's security systems, so I can come back later and conquer it for my own kin.", [`<i class="fa-solid fa-music"></i> Music`, `<i class="fa-solid fa-ghost"></i> Paranormal`, `<i class="fa-solid fa-video"></i> Movie`], "Concept/wolf.png", "Concept/wolfIcon.png"))
-candidates.push(new Candidate("Breeze the Horse", " Owner of airline company", "Did you fall from the sky? You can with me ;)", [`<i class="fa-solid fa-earth-americas"></i> Travel`, `<i class="fa-solid fa-volleyball"></i> Sport`, `<i class="fa-solid fa-ghost"></i> Paranormal`], "Concept/horse.png", "Concept/horseIcon.png"))
-candidates.push(new Candidate("Pavoni the Peacock", " Foto Model", "You already know me from the latest VOGUE covers, so lets talk about You. What do you think about my new look?", [`<i class="fa-solid fa-camera"></i> Photo`, `<i class="fa-solid fa-bag-shopping"></i> Shopping`, `<i class="fa-solid fa-palette"></i> Art`], "Concept/bird.png", "Concept/birdIcon.png"))
+candidates.push(new Candidate("Rosso the Lobster", " Underwater mafia leader", "I'm just escaped from an underwater Italian prison. I'm trying to be more polite. I'm looking for an accomplice for a crime.", [`<i class="fa-solid fa-volleyball"></i> Sport`, `<i class="fa-solid fa-pizza-slice"></i> Cooking`, `<i class="fa-solid fa-earth-americas"></i> Travel`], "Concept/lobster.png", "Concept/lobsterIcon.png", 1))
+candidates.push(new Candidate("Alveolar the Parasite", " CEO of DirtyWater Company", "I'm looking for a new host. I promise to clean up and water the flowers.", [`<i class="fa-solid fa-camera"></i> Photo`, `<i class="fa-solid fa-pizza-slice"></i> Cooking`, `<i class="fa-solid fa-book"></i> Book`], "Concept/parasite.png", "Concept/parasiteIcon.png", 2))
+candidates.push(new Candidate("Sophie the Cat", " Librarian", "I am looking for a calm partner with comfortable knees.", [`<i class="fa-solid fa-bag-shopping"></i> Shopping`, `<i class="fa-solid fa-otter"></i> Animals`, `<i class="fa-solid fa-book"></i> Book`], "Concept/cat.png", "Concept/catIcon.png", 3))
+candidates.push(new Candidate("Leonardo the Lizard", " Freelancer Artist", "I span all my free time on artistic self-development, so I'm looking for a rich partner.", [`<i class="fa-solid fa-palette"></i> Art`, `<i class="fa-solid fa-gamepad"></i> Games`, `<i class="fa-solid fa-video"></i> Movie`], "Concept/lizard.png", "Concept/lizardIcon.png", 4))
+candidates.push(new Candidate("Centaurid the Galactic Wolf", " Army leader of Arp 332 Galaxy Chain", "I am looking for someone to help me understand this planet's security systems, so I can come back later and conquer it for my own kin.", [`<i class="fa-solid fa-music"></i> Music`, `<i class="fa-solid fa-ghost"></i> Paranormal`, `<i class="fa-solid fa-video"></i> Movie`], "Concept/wolf.png", "Concept/wolfIcon.png", 5))
+candidates.push(new Candidate("Breeze the Horse", " Owner of airline company", "Did you fall from the sky? You can with me ;)", [`<i class="fa-solid fa-earth-americas"></i> Travel`, `<i class="fa-solid fa-volleyball"></i> Sport`, `<i class="fa-solid fa-ghost"></i> Paranormal`], "Concept/horse.png", "Concept/horseIcon.png", 6))
+candidates.push(new Candidate("Pavoni the Peacock", " Foto Model", "You already know me from the latest VOGUE covers, so lets talk about You. What do you think about my new look?", [`<i class="fa-solid fa-camera"></i> Photo`, `<i class="fa-solid fa-bag-shopping"></i> Shopping`, `<i class="fa-solid fa-palette"></i> Art`], "Concept/bird.png", "Concept/birdIcon.png", 7))
 
 candidateDraw();
 
@@ -148,9 +151,13 @@ const showMessagePoppup = () => {
     messagePoppup.querySelector(".messageIcon").src = candidates[candidateStack[0]].icon;
     messagePoppup.querySelector(".messageName").textContent = candidates[candidateStack[0]].name + " wrote to you!";
     document.querySelector(".messagePoppupList").appendChild(messagePoppup)
+
+    document.querySelectorAll(".messagePoppup")[activeMessageIndex].setAttribute("id", candidates[candidateStack[0]].candidateId)
+
     candidateStack.shift()
 
     messagePoppupList.addEventListener("click", openChat)
+    activeMessageIndex++
 }
 
 const nextCandidate = () =>{
@@ -168,19 +175,74 @@ const openChat = (e) => {
         if(e.target.classList[0] === "messageIcon" || e.target.classList[0] === "messageName"){
             document.querySelector(".messagePoppupList").removeChild(e.target.parentElement)
             document.querySelector(".messageBox").classList.remove("hiddenClass")
+
+            setChat(parseInt(e.target.closest(".messagePoppup").id))
         }
         else{
             document.querySelector(".messagePoppupList").removeChild(e.target)
             document.querySelector(".messageBox").classList.remove("hiddenClass")
-            console.log("2");
-        }
-    }
 
+            setChat(parseInt(e.target.closest(".messagePoppup").id))
+        }
+        activeMessageIndex--
+    }
+}
+
+const setChat = (x) =>{
+    let currentdate = new Date()
+    let time = currentdate.getHours() + ":" + currentdate.getMinutes() 
+
+    console.log(x);
+    switch(x){
+        case 1:
+            document.querySelector(".messageIcon").src = candidates[x-1].icon;
+            document.getElementById("candidateMessage1").innerHTML = "I'm organizing a bank robbery this Friday. Do you want to come with me?"
+            document.querySelector(".timeCandidateMessage1").innerHTML = time
+            break;
+
+        case 2:
+            document.querySelector(".messageIcon").src = candidates[x-1].icon;
+            document.getElementById("candidateMessage1").innerHTML = "I can see that you liked me. Can I move in tomorrow?"
+            document.querySelector(".timeCandidateMessage1").innerHTML = time
+            break;
+
+        case 3:
+            document.querySelector(".messageIcon").src = candidates[x-1].icon;
+            document.getElementById("candidateMessage1").innerHTML = "This month I was only gonna sleep and eat, but I can make an exception. Wanna go outside?"
+            document.querySelector(".timeCandidateMessage1").innerHTML = time
+            break;
+
+        case 4:
+            document.querySelector(".messageIcon").src = candidates[x-1].icon;
+            document.getElementById("candidateMessage1").innerHTML = "Do you want to come with me to my exhibition? Tickets are only 230$ apiece."
+            document.querySelector(".timeCandidateMessage1").innerHTML = time
+            break;
+        
+        case 5:
+            document.querySelector(".messageIcon").src = candidates[x-1].icon;
+            document.getElementById("candidateMessage1").innerHTML = "Will you explain to me at dinner, how much of a threat is a water gun?"
+            document.querySelector(".timeCandidateMessage1").innerHTML = time
+            break;
+
+        case 6:
+            document.querySelector(".messageIcon").src = candidates[x-1].icon;
+            document.getElementById("candidateMessage1").innerHTML = "I'm in your town on Sunday. Maybe I'll fly by You?"
+            document.querySelector(".timeCandidateMessage1").innerHTML = time
+            break;
+        
+        case 6:
+            document.querySelector(".messageIcon").src = candidates[x-1].icon;
+            document.getElementById("candidateMessage1").innerHTML = "Will you come with me to a local Mirror Maze, so you can gaze at me from all sides."
+            document.querySelector(".timeCandidateMessage1").innerHTML = time
+            break;
+
+    }
 }
 
 const closeChat = () =>{
     document.querySelector(".messageBox").classList.add("hiddenClass")
 }
+
 
 const resetSite = () => {
     localStorage.clear()
