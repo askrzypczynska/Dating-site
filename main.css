@@ -377,13 +377,13 @@ body{
     background-color: white;
     padding: 10px;
     border-radius: 10px;
-    width: 500px;
+    width: 480px;
     box-shadow: 0px 0px 15px #e94057;
 
 
 }
 
-.candidateMessageBox{
+.candidateMessageBox, .candidateMessageBox2 {
     border: 0px solid #eb4d63;
     background-color: #fff0f0;
     border-radius: 5px;
@@ -397,7 +397,7 @@ body{
     margin-top: 25px;
 }
 
-.candidateMessageBox img{
+.messageBoxIcon, .messageBoxIcon2{
     float: left;
     max-width: 60px;
     width: 100%;
@@ -415,7 +415,7 @@ body{
     float: right;
 }
 
-.userAnswer{
+.userAnswerYes, .userAnswerNo{
     display: list-item;
     margin: 10px;
 
@@ -429,7 +429,7 @@ body{
     cursor: pointer;
 }
 
-.userAnswer:hover{
+.userAnswerYes:hover, .userAnswerNo:hover{
     border: 2px solid #d44558;
     background-color: #d44558;
     
