@@ -32,8 +32,19 @@ let activeMessageIndex = 0;
 let candidateStack = [];
 let userAnswerIsVisivle = true;
 
-let currentdate = new Date()
-let time = currentdate.getHours() + ":" + currentdate.getMinutes() 
+let time
+
+const setTime = () => {
+    let currentdate = new Date();
+    let hour = currentdate.getHours();
+    let min = currentdate.getMinutes();
+
+    time = hour + ":" + min;
+
+    if(min<=9){
+        time = `${hour}:0${min}`
+    }
+}
 
 class Candidate{
 
@@ -198,88 +209,131 @@ const openChat = (e) => {
 }
 
 const setChat = (x) =>{
+    
+    setTime();
 
     switch(x){
         case 1:
             document.querySelector(".messageBoxIcon").src = candidates[x-1].icon;
+            document.querySelector(".messageBoxIcon2").src = candidates[x-1].icon;
             document.getElementById("candidateMessage1").innerHTML = "I'm organizing a bank robbery this Friday. Do you want to come with me?"
             document.querySelector(".timeCandidateMessage1").innerHTML = time
             break;
 
         case 2:
             document.querySelector(".messageBoxIcon").src = candidates[x-1].icon;
+            document.querySelector(".messageBoxIcon2").src = candidates[x-1].icon;
             document.getElementById("candidateMessage1").innerHTML = "I can see that you liked me. Can I move in tomorrow?"
             document.querySelector(".timeCandidateMessage1").innerHTML = time
             break;
 
         case 3:
             document.querySelector(".messageBoxIcon").src = candidates[x-1].icon;
+            document.querySelector(".messageBoxIcon2").src = candidates[x-1].icon;
             document.getElementById("candidateMessage1").innerHTML = "This month I was only gonna sleep and eat, but I can make an exception. Wanna go outside?"
             document.querySelector(".timeCandidateMessage1").innerHTML = time
             break;
 
         case 4:
             document.querySelector(".messageBoxIcon").src = candidates[x-1].icon;
+            document.querySelector(".messageBoxIcon2").src = candidates[x-1].icon;
             document.getElementById("candidateMessage1").innerHTML = "Do you want to come with me to my exhibition? Tickets are only 230$ apiece."
             document.querySelector(".timeCandidateMessage1").innerHTML = time
             break;
         
         case 5:
             document.querySelector(".messageBoxIcon").src = candidates[x-1].icon;
+            document.querySelector(".messageBoxIcon2").src = candidates[x-1].icon;
             document.getElementById("candidateMessage1").innerHTML = "Will you explain to me at dinner, how much of a threat is a water gun?"
             document.querySelector(".timeCandidateMessage1").innerHTML = time
             break;
 
         case 6:
             document.querySelector(".messageBoxIcon").src = candidates[x-1].icon;
+            document.querySelector(".messageBoxIcon2").src = candidates[x-1].icon;
             document.getElementById("candidateMessage1").innerHTML = "I'm in your town on Sunday. Maybe I'll fly by You?"
             document.querySelector(".timeCandidateMessage1").innerHTML = time
             break;
         
         case 7:
             document.querySelector(".messageBoxIcon").src = candidates[x-1].icon;
+            document.querySelector(".messageBoxIcon2").src = candidates[x-1].icon;
             document.getElementById("candidateMessage1").innerHTML = "Will you come with me to a local Mirror Maze, so you can gaze at me from all sides."
             document.querySelector(".timeCandidateMessage1").innerHTML = time
             break;
     }
 
-    //Wykonuje się po pierwszej rozmowie, gdy Przyciski są usuniętę --- dodać addevent
     if(userAnswerIsVisivle === false){
-        const userAnswers = userAnswersChoiceButtonsTemp.content.cloneNode(true);
-        document.querySelector(".userAnswersChoice").appendChild(userAnswers)
-        document.querySelector(".userMessageBox").classList.toggle("hiddenClass")
-    
-    }
+        const userAnswerYesBtn = document.createElement("button");
+        userAnswerYesBtn.innerHTML = "Yes, sure!";
+        userAnswerYesBtn.classList.add("userAnswerYes")
+        const userAnswerNoBtn = document.createElement("button");
+        userAnswerNoBtn.innerHTML = "No, thx.";
+        userAnswerNoBtn.classList.add("userAnswerNo")
 
-    userAnswerYesBtn.addEventListener('click', continueChatOnYes);
-    userAnswerNoBtn.addEventListener('click', continueChatOnNo);
+        userAnswersChoice.appendChild(userAnswerYesBtn);
+        userAnswersChoice.appendChild(userAnswerNoBtn);
+
+        userAnswerYesBtn.addEventListener('click', continueChatOnYes);
+        userAnswerNoBtn.addEventListener('click', continueChatOnNo);
+    }else{
+        userAnswerYesBtn.addEventListener('click', continueChatOnYes);
+        userAnswerNoBtn.addEventListener('click', continueChatOnNo);
+    }
 
 }
 
 const continueChatOnYes = () =>{
 
-    console.log("Tak");
-    userAnswersChoice.removeChild(userAnswerYesBtn)
-    userAnswersChoice.removeChild(userAnswerNoBtn)
+    userAnswersChoice.removeChild(document.querySelector(".userAnswerYes"))
+    userAnswersChoice.removeChild(document.querySelector(".userAnswerNo"))
     userAnswerIsVisivle = false;
     document.querySelector(".userMessageBox").classList.toggle("hiddenClass")
+
+    setTime();
     document.querySelector(".timeUsereMessage").innerHTML = time;
 
+    document.getElementById("userMessage1").innerHTML = "Yes, sure!";
+
+
+    setTimeout( function () {
+        document.querySelector(".candidateMessageBox2").classList.toggle("hiddenClass");
+        currentdate = new Date();
+        time = currentdate.getHours() + ":" + currentdate.getMinutes();
+        document.querySelector(".timeCandidateMessage2").innerHTML = time
+    }, 1000
+    )
 }
 
 const continueChatOnNo = () =>{
 
-    console.log("Nie");
-    userAnswersChoice.removeChild(userAnswerYesBtn)
-    userAnswersChoice.removeChild(userAnswerNoBtn)
+    userAnswersChoice.removeChild(document.querySelector(".userAnswerYes"))
+    userAnswersChoice.removeChild(document.querySelector(".userAnswerNo"))
     userAnswerIsVisivle = false;
     document.querySelector(".userMessageBox").classList.toggle("hiddenClass")
+
+    setTime();
     document.querySelector(".timeUsereMessage").innerHTML = time;
+
     document.getElementById("userMessage1").innerHTML = "No, thx.";
+
+    setTimeout( function () {
+        document.querySelector(".candidateMessageBox2").classList.toggle("hiddenClass");
+        currentdate = new Date();
+        time = currentdate.getHours() + ":" + currentdate.getMinutes();
+        document.querySelector(".timeCandidateMessage2").innerHTML = time
+        document.getElementById("candidateMessage2").innerHTML = "Ah... ok :(";
+    }, 1000
+    )
+    
 }
 
 const closeChat = () =>{
     document.querySelector(".messageBox").classList.add("hiddenClass")
+    document.querySelector(".candidateMessageBox2").classList.toggle("hiddenClass")
+    document.querySelector(".userMessageBox").classList.toggle("hiddenClass")
+
+    document.getElementById("candidateMessage2").innerHTML = "Great, can't wait :)";
 }
 
 
