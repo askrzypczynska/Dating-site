@@ -190,6 +190,7 @@ const nextCandidate = () =>{
 }
 
 const openChat = (e) => {
+    
     if(e.target.classList[0] !== "messagePoppupList"){
         if(e.target.classList[0] === "messageIcon" || e.target.classList[0] === "messageName"){
             document.querySelector(".messagePoppupList").removeChild(e.target.parentElement)
@@ -206,6 +207,7 @@ const openChat = (e) => {
         activeMessageIndex--
 
     }
+
 }
 
 const setChat = (x) =>{
@@ -276,6 +278,7 @@ const setChat = (x) =>{
 
         userAnswerYesBtn.addEventListener('click', continueChatOnYes);
         userAnswerNoBtn.addEventListener('click', continueChatOnNo);
+        userAnswerIsVisivle = true;
     }else{
         userAnswerYesBtn.addEventListener('click', continueChatOnYes);
         userAnswerNoBtn.addEventListener('click', continueChatOnNo);
@@ -334,6 +337,7 @@ const closeChat = () =>{
     document.querySelector(".userMessageBox").classList.toggle("hiddenClass")
 
     document.getElementById("candidateMessage2").innerHTML = "Great, can't wait :)";
+
 }
 
 
